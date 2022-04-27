@@ -10,3 +10,4 @@ Working on ...
 Working on selenium.
 To run the file one needs to change the gecko_path to path to geckodriver on own computer. Then in terminal write 'python sel.py'. Name 'selenium.py' brings confusion because of double-naming.
 
+The links to property offers are conditioned on being from olx site as other team chose otodom for their project.
