@@ -1,7 +1,7 @@
 ## WS project of group: 
 
 ### Karolina Kowalska
-Working on ... 
+Working on Beautiful Soup.
 
 ### Magdalena Pruszyńska
 Working on ...
