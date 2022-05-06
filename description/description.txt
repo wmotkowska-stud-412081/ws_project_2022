@@ -8,32 +8,39 @@ Weronika Motkowska (412081)
 Karolina Kowalska (412009)
 Magdalena Pruszyńska (443737)
 
+
 Description of the topic and the web page
 
-
+The main goal of the project was to scrap and save information about properties (such as name or price).
+Those are valuable information that can be used by business analyst to evaluate the current market, compare it or to speed up the proccess of finding a property to buy. 
+The used page is OLX, which is a page that accumulate many different offers posted by people. For the purpose of this project, the focus was only on the properties for sale and only in Warsaw. Each page contains photos, location, important characteristics and long description. However, there were also some limitations on what could be scrapped. For example, contact details were disallowed in robots.txt page. Detailed description on what was scrapped is in the next part of this file.
+The procedure was conducted in three different ways: using Beautiful Soap, Scrapy and Selenium but with the same results. 
 
 
 Description of the scraper mechanics and the output
 
 Our program scraps links to property offers listed on https://www.olx.pl/nieruchomosci/mieszkania/sprzedaz/warszawa/. 
-If the boolean parameter is set to True then only 100 links are taken into account. The links cannot be from otodom site and need to be cleaned.
+If the boolean parameter is set to True then only 100 links are taken into account. It was made sure that all links used were from "olx" domain. The links which led to "otodom" site were deleted, because a different group chose this page.  
 
 For each link with offer the program scraps :
 - name, 
 - price, 
-- price for m^2, 
-- m^2, 
-- how many rooms, 
-- which floor the apartment is on, 
-- where in the property located.
+- price for m^2 ('price_m2'), 
+- m^2 ('m2'), 
+- how many rooms ('rooms'), 
+- which floor the apartment is on ('floor'), 
+- where is the property located ('map').
 
 Name and price are scraped from the header. Other properties are scraped from detail table. 
 We were only able to obtain map variable in selenium and this property was vital for data analysis.
 However, selenium scraper takes the longest time because of time limitations, which are crucial for page to get its full html.
 
-The output is in a form of a dataset (csv format). The characteristics of property offers can be seen on data analysis image below.
+The output is in a form of a dataset (csv format). 
 The map variable is a string with 'Warszawa' being the first word and district following it. Price and price m^2 are in PLN. 
 URL is the link to the offer. 'Parter' in floor means 0.
+
+A short visualisaion of the characteristics of property offers can be seen on data analysis image below. 
+The bigger the circle on the map, the higher the average price in the district. The brighter the colour of the circle, the higher is the price for m^2.
 
 
 
@@ -47,4 +54,4 @@ Division of work
 
 Karolina Kowalska was working on Beautiful Soup and collaborated on description file.
 Magdalena Pruszyńska was working on Scrapy and prepared data analysis image.
-Weronika Motkowska was working on selenium and collaborated on description file.
+Weronika Motkowska was working on Selenium and collaborated on description file.
