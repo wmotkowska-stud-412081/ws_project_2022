@@ -11,8 +11,7 @@ class Flat(scrapy.Item):
     rooms        = scrapy.Field()
     floor       = scrapy.Field()
     #mapka       = scrapy.Field()
-    image = scrapy.Field()
-    link = scrapy.Field()
+    url = scrapy.Field()
 
 #getting flats details from links to offers
 class LinksSpider(scrapy.Spider):
@@ -34,12 +33,8 @@ class LinksSpider(scrapy.Spider):
         details_xpath        = '//p[re:test(@class, "css-xl6fe0-Text eu5v0x0.*")]//text()'
        #rent_xpath        = '//h1/text()'
         #map_xpath       = '//p[re:test(@class, "css-xl6fe0-Text eu5v0x0.*")]//text()'
-        image_xpath = '//div[re:test(@class,"swiper-zoom-container.*")]//@data-src'
+
         #avoiding errors with try&except, data cleaning and choosing accurate values for specific columns
-        try:
-            p['image'] = response.xpath(image_xpath).getall()[0].split(';')[0]
-        except:
-            response.xpath(image_xpath).getall() is None
         try:
             p['price_m2'] = str(str([s for s in response.xpath(details_xpath).getall() if "Cena" in s]).split(':')[1]).split('z')[0]
         except:
@@ -57,7 +52,7 @@ class LinksSpider(scrapy.Spider):
         except:
             str([s for s in response.xpath(details_xpath).getall() if "Poziom" in s]) is None
         #p['mapka']       = response.xpath(map_xpath).getall()[2]
-        p['link']       = response.request.url
+        p['url']       = response.request.url
         p['name']        = response.xpath(name_xpath).getall()
         try:
             p['price']       = response.xpath(price_xpath).getall()[0]
