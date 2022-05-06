@@ -35,17 +35,22 @@ class LinksSpider(scrapy.Spider):
         regexp = re.compile('.*otodom.*')
         for s in selection:
             #check if list of links does not exceed 100
-            if limit and len(lista_linkow) <100: 
+            if limit: 
                 #get the specific part of the link from selection and merge it with the default start
                 l = Link()
                 #check if the link is otodom or olx
                 l['link'] ='https://olx.pl' + s.get()
                 print('https://olx.pl' + s.get())
                 if (regexp.search(l['link'])==None):
+                    lista_linkow.append(l['link'])
+                    #append to the list in order to keep an eye on length of the list
+                if (regexp.search(l['link'])==None) and len(lista_linkow) <101:
                     #add the link to csv if it's olx offer
                     yield l
                     #append to the list in order to keep an eye on length of the list
-                    lista_linkow.append(l['link'])
+                    
+        
+
             
 
         
