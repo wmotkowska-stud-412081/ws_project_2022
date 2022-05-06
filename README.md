@@ -8,7 +8,7 @@ The links to property offers are conditioned on being from olx site as other tea
 ##### Karolina Kowalska
 Working on Beautiful Soup.
 To run the file one needs to write in the terminal:
-##### python bs4.py
+###### python bs4.py
 The final dataset should appear in your folder.
 
 ##### Magdalena Pruszyńska
