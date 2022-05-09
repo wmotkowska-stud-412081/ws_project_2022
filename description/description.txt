@@ -33,7 +33,7 @@ For each link with offer the program scraps :
 
 Name and price are scraped from the header. Other properties are scraped from detail table. 
 We were only able to obtain map variable in selenium and this property was vital for data analysis.
-However, selenium scraper takes the longest time because of time limitations, which are crucial for page to get its full html.
+All ways are quite similar and provide similar output. The main difference is the program's runtime. Spider is the fastest, it takes seconds to finish. Beautiful soup is slower: about 2-3 minutes. Selenium scraper takes the longest time because of time limitations, which are crucial for page to get its full html.
 
 The output is in a form of a dataset (csv format). 
 The map variable is a string with 'Warszawa' being the first word and district following it. Price and price m^2 are in PLN. 
