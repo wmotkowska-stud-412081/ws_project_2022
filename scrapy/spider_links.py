@@ -4,7 +4,7 @@ import re
 #creating list to which links to pages scraped will be appended
 lista_linkow = []
 #setting Boolean value to True = analysis is limited to 100 links
-limit = len(lista_linkow) <100
+limit = True
 
 #creating Link class in order to be able to append links to csv file later on
 class Link(scrapy.Item):
@@ -34,6 +34,7 @@ class LinksSpider(scrapy.Spider):
         selection = response.xpath(xpath)
         regexp = re.compile('.*otodom.*')
         for s in selection:
+            #check if list of links should not exceed 100
             #get the specific part of the link from selection and merge it with the default start
             l = Link()
             #check if the link is otodom or olx
@@ -42,11 +43,14 @@ class LinksSpider(scrapy.Spider):
             if (regexp.search(l['link'])==None):
                 lista_linkow.append(l['link'])
                 #append to the list in order to keep an eye on length of the list
-            if (regexp.search(l['link'])==None) and limit:
-                #add the link to csv if it's olx offer
-                yield l
-                #append to the list in order to keep an eye on length of the list
-                    
+            if limit:
+                if (regexp.search(l['link'])==None) and len(lista_linkow) <101:
+                    #add the link to csv if it's olx offer
+                    yield l
+                    #append to the list in order to keep an eye on length of the list
+            else:
+                if (regexp.search(l['link'])==None):
+                    yield l
         
 
             
