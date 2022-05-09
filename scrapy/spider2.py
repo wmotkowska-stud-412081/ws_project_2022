@@ -10,7 +10,6 @@ class Flat(scrapy.Item):
     m2       = scrapy.Field()
     rooms        = scrapy.Field()
     floor       = scrapy.Field()
-    #mapka       = scrapy.Field()
     url = scrapy.Field()
 
 #getting flats details from links to offers
@@ -31,8 +30,6 @@ class LinksSpider(scrapy.Spider):
         price_xpath       = '//h3/text()'
         #xpath to info pane containing a list of information on flats
         details_xpath        = '//p[re:test(@class, "css-xl6fe0-Text eu5v0x0.*")]//text()'
-       #rent_xpath        = '//h1/text()'
-        #map_xpath       = '//p[re:test(@class, "css-xl6fe0-Text eu5v0x0.*")]//text()'
 
         #avoiding errors with try&except, data cleaning and choosing accurate values for specific columns
         try:
@@ -51,7 +48,7 @@ class LinksSpider(scrapy.Spider):
             p['floor']       = str(str([s for s in response.xpath(details_xpath).getall() if "Poziom" in s]).split(':')[1]).split("'")[0]
         except:
             str([s for s in response.xpath(details_xpath).getall() if "Poziom" in s]) is None
-        #p['mapka']       = response.xpath(map_xpath).getall()[2]
+
         p['url']       = response.request.url
         p['name']        = response.xpath(name_xpath).getall()
         try:
